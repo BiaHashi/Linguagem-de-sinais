@@ -52,3 +52,17 @@ while True:
                     finger_fold_status.append(False)
 
             print(finger_fold_status)
+
+            if all(finger_fold_status):
+                if lm_list[thumb_tip].y < lm_list[thumb_tip-1].y < lm_list[thumb_tip-2].y:
+                    print("Curti")
+                    cv2.putText(img,"Curti",(20,30),cv2.FONT_HERSHEY_COMPLEX,1,(255,0,85),3)
+
+                if lm_list[thumb_tip].y > lm_list[thumb_tip-1].y > lm_list[thumb_tip-2].y:
+                    print("Não curti")
+                    cv2.putText(img,"Não curti",(20,30),cv2.FONT_HERSHEY_COMPLEX,1,(255,0,85),3)
+
+            mp_drawing.draw_landmarks(img,hand_landmark,mp_hands.HAND_CONNECTIONS,mp_drawing.DrawingSpec((0,0,255),2,2),mp_drawing.DrawingSpec((0,255,0),4,2))
+
+cv2.imshow("Hands tracking",img)
+cv2.waitKey(1)
